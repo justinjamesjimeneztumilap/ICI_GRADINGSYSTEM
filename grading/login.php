@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || empty($password)) {
         $message = "Please fill all fields.";
     } else {
-        // Prepare statement: login by email + password
         $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
@@ -27,8 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
-
-            // Redirect to home page
             header("Location: home.php");
             exit();
         } else {
@@ -43,20 +40,17 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login - Grading System</title>
-    <style>
-        body { font-family: Arial; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .login-box { background: #fff; padding: 20px; border-radius: 10px; width: 350px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;}
-        input[type="submit"] { background: #007BFF; color: #fff; border: none; cursor: pointer; }
-        .message { color: red; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Grading System</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="login-box">
-    <h2>Login</h2>
+    <img src="https://lh5.googleusercontent.com/proxy/_pYvYMNVADwNNbK_cvy-QFr4R3-7XGRO_rziYiMJbXvFAOuQIDlrX5dP4b4zxIASRQyCfHcOyx_Y9CNOAkC6" alt="Logo">
+    <h2>Grading System Login</h2>
     <?php if($message) echo "<p class='message'>$message</p>"; ?>
     <form method="POST" action="">
         <input type="email" name="email" placeholder="School Email" required>
