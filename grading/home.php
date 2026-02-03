@@ -8,7 +8,6 @@ if (!isset($_SESSION['role'])) {
 $role = $_SESSION['role'];
 $name = $_SESSION['name'];
 
-// Set theme colors and cards per role
 if ($role === 'student') {
     $bg = "linear-gradient(135deg, #1abc9c, #3498db)";
     $badge = "STUDENT";
@@ -17,7 +16,7 @@ if ($role === 'student') {
     $bg = "linear-gradient(135deg, #2ecc71, #27ae60)";
     $badge = "TEACHER";
     $cards = ["Encode Grades", "My Classes", "Students"];
-} else { // admin
+} else { 
     $bg = "linear-gradient(135deg, #000, #222)";
     $badge = "ADMINISTRATOR";
     $cards = ["Manage Users", "Subjects", "System Settings"];
